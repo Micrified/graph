@@ -85,6 +85,20 @@ func (g *Graph) Map (f func(int, int, interface{})) {
 	}
 }
 
+func (g *Graph) Clone () *Graph {
+	if nil == g {
+		return nil
+	}
+	var clone Graph = make([][]interface{}, g.Len())
+	for i := 0; i < g.Len(); i++ {
+		clone[i] = make([]interface{}, len((*g)[i]))
+		for j := 0; j < len((*g)[i]); j++ {
+			clone[i][j] = (*g)[i][j]
+		}
+	}
+	return &clone
+}
+
 func (g *Graph) String (f func(interface{}) string) string {
 	s := "   "
 	n := g.Len()
